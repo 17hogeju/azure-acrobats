@@ -5,6 +5,7 @@ module.exports = app => {
   
     // Retrieve a single Tutorial with id
     router.get("/households", households.findAllHouseHolds);
+    router.post("/households", households.postHouseholds);
 
     app.use('/api', router);
   };
