@@ -12,11 +12,12 @@ import ImportData from "./components/import-data.component";
 import EventBus from "./common/EventBus";
 import AuthService from "./services/auth.service";
 import OneA from "./components/onea.component"
+import TwoA from "./components/twoa.component"
 
 import { clearMessage } from "./actions/message";
 
 import { history } from './helpers/history';
-import Transactions from "./components/oneb.component";
+import OneB from "./components/oneb.component";
 
 class App extends Component {
   constructor(props) {
@@ -79,12 +80,17 @@ class App extends Component {
                 </li>
                 <li className="nav-item">
                   <Link to={"/onea"} className="nav-link">
-                    Question 1A
+                    Question 1A/Dashboard
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to={"/oneb"} className="nav-link">
                     Question 1B
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/twoa"} className="nav-link">
+                    Question 2A
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -112,7 +118,8 @@ class App extends Component {
               <Route exact path="/import" component={ImportData} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/onea" component={OneA} />
-              <Route exact path="/oneb" component={Transactions} />
+              <Route exact path="/oneb" component={OneB} />
+              <Route exact path="/twoa" component={TwoA} />
             </Switch>
           </div>
         </div>
@@ -123,13 +130,17 @@ class App extends Component {
 function mapStateToProps(state) {
   const { user } = state.auth;
   const { household } = state.household;
-  const { transaction } = state.transaction;
-  const { category } = state.transaction;
+  const { onea } = state.onea;
+  const { category } = state.category;
+  const { hshd } = state.hshd;
+  const { twoa } = state.twoa;
   return {
     user,
     household,
-    transaction,
-    category
+    onea,
+    category,
+    hshd,
+    twoa
   };
 }
 

@@ -1,5 +1,5 @@
 import {
-    RETRIEVE_TRANSACTIONS_SUCCESS, RETRIEVE_TRANSACTIONS_FAIL, RETRIEVE_TRANSACTIONS_BEGIN
+    RETRIEVE_ONEA_SUCCESS, RETRIEVE_ONEA_FAIL, RETRIEVE_ONEA_BEGIN
 } from "../actions/types";
 
 const initialState = {
@@ -8,10 +8,10 @@ const initialState = {
     error: null
   };
 
-function transactionReducer(state = initialState, action) {
+function oneAReducer(state = initialState, action) {
 
 switch (action.type) {
-    case RETRIEVE_TRANSACTIONS_BEGIN:
+    case RETRIEVE_ONEA_BEGIN:
         return {
             ...state,
             items: [],
@@ -19,7 +19,7 @@ switch (action.type) {
             error: null,
         };
 
-    case RETRIEVE_TRANSACTIONS_SUCCESS:
+    case RETRIEVE_ONEA_SUCCESS:
         console.log(action.payload);
         return {
             ...state,
@@ -27,7 +27,7 @@ switch (action.type) {
             loading: false,
             error: null,
         };
-    case RETRIEVE_TRANSACTIONS_FAIL:
+    case RETRIEVE_ONEA_FAIL:
         return {
             ...state,
             items: [],
@@ -39,4 +39,4 @@ switch (action.type) {
         return state;
   };
 }
-export default transactionReducer;
+export default oneAReducer;

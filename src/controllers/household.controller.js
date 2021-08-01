@@ -17,7 +17,7 @@ exports.findAllHouseHolds = (req, res) => {
     });
 };
 
-exports.create = (req, res) => {
+exports.postHouseholds = (req, res) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({
@@ -47,7 +47,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Household."
       });
     });
   };

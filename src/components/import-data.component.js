@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { CSVReader } from 'react-papaparse';
-import { postHousehold } from "../actions/households";
+import { CSVReader, jsonToCSV} from 'react-papaparse';
+import { postHouseholds } from "../actions/uploadCsv";
 
 
 const n = 3;
@@ -30,30 +30,25 @@ class ImportData extends Component {
     }
 
     handleOnDrop = (data) => {
-        let tempdata;
-        if(this.state.checkboxes[0] == true){
-            if(tempdata = verifyAndFormatHouseholds(data)) {
-                this.props.postHousehold(tempdata).then((data) => {
-                    this.setState({
-                        hshd_num: data.hshd_num,
-                        loyalty_flag: data.loyalty_flag,
-                        age_range: data.age_range ,
-                        marital_status: data.marital_status,
-                        homeowner_desc:data.homeowner_desc,
-                        income_range: data.income_range,
-                        hshd_composition: data.hshd_composition,
-                        hh_size: data.hh_size,
-                        children: data.children
-                    });
-                    console.log(data);
-                }).catch((e) => {
-                    console.log(e);
-                });
-            }
-        } else if(this.state.checkboxes[1] == true) {
-            verifyAndFormatProducts(data);
+        console.log(data);
+        let myarr = [];
+        for (let i = 1; i < data.length - 1; i++){
+            myarr.push(data[i].data);
+        }
+        console.log(data[0].data);
+        console.log(myarr);
+        const csv = jsonToCSV({
+            "fields": data[0].data,
+            "data": myarr
+        });
+        console.log(csv);
+        if (this.state.checkboxes[0] == true) {
+            this.props.dispatch(postHouseholds(csv));
+
+        } else if (this.state.checkboxes[1] == true) {
+            // verifyAndFormatProducts(data);
         } else {
-            verifyAndFormatTransactions(data);
+            // verifyAndFormatTransactions(data);
         }
     };
 
@@ -81,15 +76,15 @@ class ImportData extends Component {
                         <span>Drop CSV file here or click to upload.</span>
                     </CSVReader>
                     <div className="d-flex flex-column align-items start">
-                    {checkboxes.map((item, i) => (
-                        <label>
-                            <input
-                                key={i}
-                                type="checkbox"
-                                checked={item}
-                                onChange={e => this.onChange(e, i) /* notice passing an index. we will use it */}
-                            />  {mylabel[i]}</label>
-                    ))}
+                        {checkboxes.map((item, i) => (
+                            <label>
+                                <input
+                                    key={i}
+                                    type="checkbox"
+                                    checked={item}
+                                    onChange={e => this.onChange(e, i) /* notice passing an index. we will use it */}
+                                />  {mylabel[i]}</label>
+                        ))}
                     </div>
                 </div>
             </div>

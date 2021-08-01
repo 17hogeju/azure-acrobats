@@ -1,10 +1,10 @@
 module.exports = app => {
-    const transactions = require("../controllers/transaction.controller.js");
+    const hshds = require("../controllers/hshdnums.controller.js");
   
     var router = require("express").Router();
   
     // Retrieve a single Tutorial with id
-    router.get("/transactions", transactions.findAllTransactions);
+    router.get("/hshd_nums", hshds.findHshdNums);
 
     app.use('/api', router);
   };

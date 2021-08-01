@@ -1,29 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchTransactions } from "../actions/transactions";
+import { fetchOneA } from "../actions/onea";
+import DropDown from "./dropdown.component";
 import LineGraph from "./line-graph.component";
+
 
 class OneA extends Component {
 
-
-    getById(obj, property){
-        let i;
-        let array = [];
-        for(i = 0; i < obj.length; i++){
-            array.push(obj[i][property]);
+    constructor(props){
+        super(props);
+        this.state = {
+            data: "0029"
         }
-        return array;
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchTransactions());
+        this.props.dispatch(fetchOneA("0029"));
+    }
+
+
+    fetchHousehold = (childData) => {
+        this.setState({data: childData});
+        this.props.dispatch(fetchOneA(childData));
     }
 
     render() {
-        let terror = this.props.terror;
-        let tloading = this.props.tloading;
-        let transactions = this.props.transactions;
-        if (tloading) {
+        let oneaerror = this.props.oneaerror;
+        let onealoading = this.props.onealoading;
+        let onea = this.props.onea;
+        let labels = [];
+        let values = [];
+        let title = "Cusomter Engagement for Household: " + 29;
+        if (onealoading) {
             return [
                 <div className="container">
                     <div className="d-flex flex-column justify-content-center align-items-center">
@@ -32,31 +40,44 @@ class OneA extends Component {
                 </div>
             ]
         }
-        if (terror) {
+        if (oneaerror) {
             return [
-            <div className="container">
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                    <div>Error! {terror.message}</div>
-                </div>
-            </div>
-            ]
-        } 
-            return (
                 <div className="container">
                     <div className="d-flex flex-column justify-content-center align-items-center">
-                        <h2>Household Spending Over Time</h2>
-                        <LineGraph labels={this.getById(transactions.data[0], "year")} data={this.getById(transactions.data[0], "sum")} yaxis="Total Amount Spent in US Dollars" xaxis="Month and Year" title="Collective Sum of All Transactions"/>
+                        <div>Error! {oneaerror.message}</div>
                     </div>
                 </div>
-            );
-        
+            ]
+        } 
+        console.log(onea.data[0]);
+        if(onea){
+            let data = onea.data[0];
+            console.log(data);
+            title = "Cusomter Engagement for Household: " + data[0].hshd_num;
+            for(let i = 0; i < data.length; i++){
+                console.log(data[i].weekly_spending);
+                labels.push(data[i].purchase_week);
+                values.push(data[i].weekly_spending);
+            }
+        }
+        return (
+            <div className="container">
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                    <h2>One A</h2>
+                    <h4>Customer Engagement Over Time</h4>
+                    <DropDown onSelectHousehold={this.fetchHousehold} />
+                    <LineGraph labels={labels} data={values} yaxis="Total Amount Spent in US Dollars" xaxis="Transaction Date and Time" title={title}/>
+                </div>
+            </div>
+        );
+
     }
 }
 
 const mapStateToProps = (state) => ({
-    transactions: state.transaction.items,
-    tloading: state.transaction.loading,
-    terror: state.transaction.error,
+    onea: state.onea.items,
+    onealoading: state.onea.loading,
+    oneaerror: state.onea.error,
 });
 
 export default connect(mapStateToProps)(OneA);

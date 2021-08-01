@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const path = __dirname + '/build/';
+global.__basedir = __dirname;
 const app = express();
 
 var corsOptions = {
@@ -57,8 +58,11 @@ require('./src/routes/auth.routes')(app);
 require('./src/routes/user.routes')(app);
 require('./src/routes/user-functions.routes')(app);
 require('./src/routes/household.routes')(app);
-require('./src/routes/transaction.routes')(app);
+require('./src/routes/onea.routes')(app);
+require('./src/routes/twoa.routes')(app);
 require('./src/routes/category.routes')(app);
+require('./src/routes/upload.routes')(app);
+require('./src/routes/hshdnums.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

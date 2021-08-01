@@ -3,14 +3,20 @@ import auth from "./auth";
 import message from "./message";
 import user from "./user";
 import household from "./household";
-import transaction from "./transaction";
+import onea from "./onea";
+import twoa from "./twoa";
 import category from "./category";
+import upload from "./upload";
+import hshd from "./hshdnums";
 
 export default combineReducers({
   auth,
   message,
   user,
   household, 
-  transaction,
-  category
+  onea,
+  category,
+  upload,
+  hshd,
+  twoa
 });
