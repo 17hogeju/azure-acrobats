@@ -20,7 +20,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const db = require("./src/models");
-const Role = db.role;
 db.sequelize.sync();
 // db.sequelize.sync({ force: true, logging: console.log }).then(() => {
 //     console.log("Drop and re-sync db.");

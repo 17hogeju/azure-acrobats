@@ -3,9 +3,6 @@ import {
     RETRIEVE_HOUSEHOLDS_BEGIN, 
     RETRIEVE_HOUSEHOLDS_SUCCESS, 
     RETRIEVE_HOUSEHOLDS_FAIL,
-    POST_HOUSEHOLDS_BEGIN, 
-    POST_HOUSEHOLDS_SUCCESS, 
-    POST_HOUSEHOLDS_FAIL,
 
 } from "./types";
 
@@ -23,19 +20,6 @@ export const fetchHouseholds = () => (dispatch) => {
     );
 };
 
-export const postHousehold = (data) => async (dispatch) => {
-    dispatch(postHouseholdsBegin());
-    return HouseholdService.postHouseholds({ data }).then(
-        (data) => {
-            dispatch(postHouseholdsSuccess(data));
-            return Promise.resolve();
-        },
-        (error) => {
-            dispatch(postHouseholdsFail(error));
-            return Promise.reject();
-        }
-    );
-  };
 
 export const retrieveHouseholdsBegin = () => ({
     type: RETRIEVE_HOUSEHOLDS_BEGIN,
@@ -51,16 +35,3 @@ export const retrieveHouseholdsFail = error => ({
     payload: error 
 });
 
-export const postHouseholdsBegin = () => ({
-    type: POST_HOUSEHOLDS_BEGIN,
-});
-
-export const postHouseholdsSuccess = households => ({
-    type: POST_HOUSEHOLDS_SUCCESS,
-    payload: households
-});
-
-export const postHouseholdsFail = error => ({
-    type: POST_HOUSEHOLDS_FAIL,
-    payload: error 
-});

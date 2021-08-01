@@ -1,16 +1,25 @@
 import {
-    UPLOAD_HOUSHOLDS_BEGIN, UPLOAD_HOUSHOLDS_SUCCESS, UPLOAD_HOUSHOLDS_FAIL
+    UPLOAD_HOUSHOLDS_BEGIN, UPLOAD_HOUSHOLDS_SUCCESS, UPLOAD_HOUSHOLDS_FAIL, UPLOAD_HOUSHOLDS_INACTIVE
 } from "../actions/types";
 
 const initialState = {
     items: [],
-    loading: true,
+    loading: false,
     error: null
   };
 
 function uploadReducer(state = initialState, action) {
 
 switch (action.type) {
+
+    case UPLOAD_HOUSHOLDS_INACTIVE:
+        return {
+            ...state,
+            items: [],
+            loading: false,
+            error: null
+        };
+
     case UPLOAD_HOUSHOLDS_BEGIN:
         return {
             ...state,

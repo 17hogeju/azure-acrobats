@@ -134,13 +134,15 @@ function mapStateToProps(state) {
   const { category } = state.category;
   const { hshd } = state.hshd;
   const { twoa } = state.twoa;
+  const { upload } = state.upload;
   return {
     user,
     household,
     onea,
     category,
     hshd,
-    twoa
+    twoa,
+    upload
   };
 }
 

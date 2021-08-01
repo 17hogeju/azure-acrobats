@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { fetchOneA } from "../actions/onea";
 import DropDown from "./dropdown.component";
 import LineGraph from "./line-graph.component";
+import { Redirect } from 'react-router-dom';
+
 
 
 class OneA extends Component {
@@ -10,12 +12,12 @@ class OneA extends Component {
     constructor(props){
         super(props);
         this.state = {
-            data: "0029"
+            data: "0010"
         }
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchOneA("0029"));
+        this.props.dispatch(fetchOneA("0010"));
     }
 
 
@@ -25,12 +27,17 @@ class OneA extends Component {
     }
 
     render() {
+        console.log(this.props);
+        let currentUser = this.props.user;
+        if (!currentUser) {
+          return <Redirect to="/login" />;
+        }
         let oneaerror = this.props.oneaerror;
         let onealoading = this.props.onealoading;
         let onea = this.props.onea;
         let labels = [];
         let values = [];
-        let title = "Cusomter Engagement for Household: " + 29;
+        let title = "Cusomter Engagement for Household: 0010";
         if (onealoading) {
             return [
                 <div className="container">
@@ -49,8 +56,8 @@ class OneA extends Component {
                 </div>
             ]
         } 
-        console.log(onea.data[0]);
-        if(onea){
+        console.log(onea.data);
+        if(onea.data[0].length !== 0){
             let data = onea.data[0];
             console.log(data);
             title = "Cusomter Engagement for Household: " + data[0].hshd_num;
@@ -75,6 +82,7 @@ class OneA extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    user: state.auth.isLoggedIn,
     onea: state.onea.items,
     onealoading: state.onea.loading,
     oneaerror: state.onea.error,
