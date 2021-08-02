@@ -1,7 +1,7 @@
 # Azure Acrobats
 
-* First, install the latest postgresql on your computer
-* To run this locally, clone this repo
+* To run this locally, first, install the latest postgresql on your computer
+* Then, clone this repo
 * Once cloned, extract to any location on your computer
 * Open up a command prompt at that location, and run the command "npm install" to install node modules
 * Next, run the command "npm run build"
