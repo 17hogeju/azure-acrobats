@@ -1,6 +1,10 @@
 # Azure Acrobats
 
-* Navigate to https://azure-acrobats.azurewebsites.net/#/register
-* Create a profile by entering your username and password
-* Once the profile is created, login to your account
-* Feel free to import a new dataset or look at the dashboard or responses to the questions asked using the existing dataset
+* To run this locally, clone this repo
+* Once cloned, extract to any location on your computer
+* Open up a command prompt at that location, and run the command "npm install" to install node modules
+* Next, run the command "npm run build"
+* Finally, run the command "node server.js"
+
+* The project should show up on localhost:8080/#/register.
+* Proceed by signing up and then logging in
