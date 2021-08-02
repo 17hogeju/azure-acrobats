@@ -12,4 +12,5 @@
 * The project should show up on localhost:8080/#/register.
 * Proceed by signing up and then logging in
 
+And finally, please go over the writeup.pdf document also included on this repo.
 
