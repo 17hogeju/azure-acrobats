@@ -122,10 +122,10 @@ class ImportData extends Component {
         if (hloading) {
         }
         if (herror) {
-            alert("There was an error while uploading your data. You may have duplicates in your data.");
+            // alert("There was an error while uploading your data. You may have duplicates in your data.");
         }
         if (hdata.length !== 0) {
-            alert("Data uploaded successfully");
+            // alert("Data uploaded successfully");
         }
         return (
             <div className="container">
