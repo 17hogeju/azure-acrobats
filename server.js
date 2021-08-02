@@ -6,7 +6,7 @@ global.__basedir = __dirname;
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "https://azure-acrobats.azurewebsites.net"
 };
 
 app.use(cors(corsOptions));
