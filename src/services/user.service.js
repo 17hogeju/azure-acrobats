@@ -1,7 +1,7 @@
 
 import http from '../http-common';
 
-const API_URL = 'https://azure-acrobats.azurewebsites.net/api/user/';
+const API_URL = 'http://localhost:8080/api/user/';
 
 class UserService {
 

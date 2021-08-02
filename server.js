@@ -6,7 +6,7 @@ global.__basedir = __dirname;
 const app = express();
 
 var corsOptions = {
-  origin: "https://azure-acrobats.azurewebsites.net"
+  origin: "http://localhost:8081"
 };
 
 app.use(cors(corsOptions));
@@ -64,7 +64,7 @@ require('./src/routes/upload.routes')(app);
 require('./src/routes/hshdnums.routes')(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

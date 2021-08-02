@@ -3,7 +3,7 @@ const sequelize = db.sequelize;
 
 
 exports.findCategorySales = (req, res) => {
-    sequelize.query(`select sum(ta.spend), trim(p.commodity) as "commodity",
+    sequelize.query(`select sum(cast(trim(ta.spend) as float)), trim(p.commodity) as "commodity",
     concat(extract(month from ta.purchase_date), '-20', extract(year from ta.purchase_date)) as "month/year" 
     from kroger.transactions as ta
     inner join kroger.products p on p.product_num = ta.product_num 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'https://azure-acrobats.azurewebsites.net/api/';
+const API_URL = 'http://localhost:8080/api/';
 
 class UploadHouseholdsService {
 
